@@ -386,7 +386,7 @@ int main()
 					fillInSingleSquareInCol(COL9);
 			}
 
-			//Scann all quadrants for a single missing number
+			//Scan all quadrants for a single missing number
 			else if (scannedTopLeftQuadForSingleDigit == false) 
 			{
 				scannedTopLeftQuadForSingleDigit = true; 
@@ -810,25 +810,12 @@ int main()
 				scannedCol8 = false;
 				scannedCol9 = false;
 
-				scannedTopLeftQuad = false;
-				scannedTopCenterQuad = false;
-				scannedTopRightQuad = false;
-				scannedMidLeftQuad = false;
-				scannedMidCenterQuad = false;
-				scannedMidRightQuad = false;
-				scannedBotLeftQuad = false;
-				scannedBotCenterQuad = false;
-				scannedBotRightQuad = false;
-
-				scannedTopLeftQuadForSingleDigit = false;
-				scannedTopCenterQuadForSingleDigit = false;
-				scannedTopRightQuadForSingleDigit = false;
-				scannedMidLeftQuadForSingleDigit = false;
-				scannedMidCenterQuadForSingleDigit = false;
-				scannedMidRightQuadForSingleDigit = false;
-				scannedBotLeftQuadForSingleDigit = false;
-				scannedBotCenterQuadForSingleDigit = false;
-				scannedBotRightQuadForSingleDigit = false;
+				scannedTopQuads = false;
+				scannedMidQuads = false;
+				scannedBotQuads = false;
+				scannedLeftCol = false;
+				scannedCenterCol = false;
+				scannedRightCol = false;
 
 				scannedTopCenterAndTopRightForSameDigit = false;
 				scannedTopLeftAndTopRightForSameDigit = false;
@@ -839,7 +826,6 @@ int main()
 				scannedBotCenterAndBotRightForSameDigit = false;
 				scannedBotLeftAndBotRightForSameDigit = false;
 				scannedBotLeftAndBotCenterForSameDigit = false;
-
 				scannedMidLeftandBotLeftForSameDigit = false;
 				scannedTopLeftAndBotLeftForSameDigit = false;
 				scannedTopLeftAndMidLeftForSameDigit = false;
@@ -850,17 +836,15 @@ int main()
 				scannedTopRightAndBotRightForSameDigit = false;
 				scannedTopRightAndMidRightForSameDigit = false;
 
-				scannedLeftQuads = false;
-				scannedCenterQuads = false;
-				scannedBotQuads = false;
-
-				scannedTopRow = false;
-				scannedMidRow = false;
-				scannedBotRow = false;
-
-				scannedLeftCol = false;
-				scannedCenterCol = false;
-				scannedRightCol = false;
+				scannedTopLeftQuadForSingleDigit = false;
+				scannedTopCenterQuadForSingleDigit = false;
+				scannedTopRightQuadForSingleDigit = false;
+				scannedMidLeftQuadForSingleDigit = false;
+				scannedMidCenterQuadForSingleDigit = false;
+				scannedMidRightQuadForSingleDigit = false;
+				scannedBotLeftQuadForSingleDigit = false;
+				scannedBotCenterQuadForSingleDigit = false;
+				scannedBotRightQuadForSingleDigit = false;
 			}//end of if
 		}//end of while(intCnt <10)
 		
@@ -1071,9 +1055,9 @@ int rowIndexOfKeyInQuadrant(int key, int quadrantID)
 
 int colIndexofKeyQuadrant(int key, int quadrantID)
 {
-	for (int row = 0; row < 3; row++)
+	for (int col = 0; col < 3; col++)
 	{
-		for (int col = 0; col < 3; col++)
+		for (int row = 0; row< 3; row++)
 		{
 			if (quadrantID == TOPLEFTQUAD)
 			{
@@ -1098,7 +1082,7 @@ int colIndexofKeyQuadrant(int key, int quadrantID)
 			else if (quadrantID == MIDCENTERQUAD)
 			{
 				if (quadrantMidCenter[row][col] == key)
-					return row;
+					return col;
 			}
 			else if (quadrantID == MIDRIGHTQUAD)
 			{
@@ -1591,6 +1575,7 @@ void fillInFreeCrossHatchedSquareInQuad(int key, int quadrantToFillID)
 	}
 
 	//Update the puzzleInts array based on the newly updated quadrant
+	
 	updatePuzzleInts();
 	fillInQuadrants();
 	setScannedFlagsToFalse();
@@ -1638,7 +1623,7 @@ void updatePuzzleInts()
 		}
 	}
 
-	system("cls");
+	//system("cls");
 	displaySudokuPuzzle();
 }
 
@@ -1748,7 +1733,7 @@ int colIndexOfKeyInThisRow(int key, int rowIndex)
 
 int rowIndexOfKeyInThisCol(int key, int colIndex)
 {
-	for (int row = 0; row < COLS; row++)
+	for (int row = 0; row < ROWS; row++)
 	{
 		if (puzzleInt[row][colIndex] == key)
 		{
@@ -1756,8 +1741,7 @@ int rowIndexOfKeyInThisCol(int key, int colIndex)
 		}
 	}
 	return -1;
-}
-
+}//not used
 int whatSingleNumIsMissingInThisRow(int rowIndex)
 {
 	for (int col = 0; col < COLS; col++)
@@ -1770,6 +1754,7 @@ int whatSingleNumIsMissingInThisRow(int rowIndex)
 	return -1;
 }
 
+//not used
 int whatSingleNumIsMissingInThisCol(int colIndex)
 {
 	for (int row = 0; row < ROWS; row++)
@@ -1871,7 +1856,7 @@ int findAvailablRowInCrossHatchQuad()
 
 void setScannedFlagsToFalse()
 {
-	scannedRow1 = false; 
+	scannedRow1 = false;
 	scannedRow2 = false;
 	scannedRow3 = false;
 	scannedRow4 = false;
@@ -1881,7 +1866,7 @@ void setScannedFlagsToFalse()
 	scannedRow8 = false;
 	scannedRow9 = false;
 
-	scannedCol1 = false; 
+	scannedCol1 = false;
 	scannedCol2 = false;
 	scannedCol3 = false;
 	scannedCol4 = false;
@@ -1891,25 +1876,12 @@ void setScannedFlagsToFalse()
 	scannedCol8 = false;
 	scannedCol9 = false;
 
-	scannedTopLeftQuad = false;
-	scannedTopCenterQuad = false;
-	scannedTopRightQuad = false;
-	scannedMidLeftQuad = false;
-	scannedMidCenterQuad = false;
-	scannedMidRightQuad = false;
-	scannedBotLeftQuad = false;
-	scannedBotCenterQuad = false;
-	scannedBotRightQuad = false;
-
-	scannedTopLeftQuadForSingleDigit = false;
-	scannedTopCenterQuadForSingleDigit = false;
-	scannedTopRightQuadForSingleDigit = false;
-	scannedMidLeftQuadForSingleDigit = false;
-	scannedMidCenterQuadForSingleDigit = false;
-	scannedMidRightQuadForSingleDigit = false;
-	scannedBotLeftQuadForSingleDigit = false;
-	scannedBotCenterQuadForSingleDigit = false;
-	scannedBotRightQuadForSingleDigit = false;
+	scannedTopQuads = false;
+	scannedMidQuads = false;
+	scannedBotQuads = false;
+	scannedLeftCol = false;
+	scannedCenterCol = false;
+	scannedRightCol = false;
 
 	scannedTopCenterAndTopRightForSameDigit = false;
 	scannedTopLeftAndTopRightForSameDigit = false;
@@ -1920,7 +1892,6 @@ void setScannedFlagsToFalse()
 	scannedBotCenterAndBotRightForSameDigit = false;
 	scannedBotLeftAndBotRightForSameDigit = false;
 	scannedBotLeftAndBotCenterForSameDigit = false;
-
 	scannedMidLeftandBotLeftForSameDigit = false;
 	scannedTopLeftAndBotLeftForSameDigit = false;
 	scannedTopLeftAndMidLeftForSameDigit = false;
@@ -1931,21 +1902,15 @@ void setScannedFlagsToFalse()
 	scannedTopRightAndBotRightForSameDigit = false;
 	scannedTopRightAndMidRightForSameDigit = false;
 
-	scannedLeftQuads = false;
-	scannedCenterQuads = false;
-	scannedBotQuads = false;
-
-	scannedLeftQuads = false;
-	scannedCenterQuads = false;
-	scannedBotQuads = false;
-
-	scannedTopRow = false;
-	scannedMidRow = false;
-	scannedBotRow = false;
-
-	scannedLeftCol = false;
-	scannedCenterCol = false;
-	scannedRightCol = false;
+	scannedTopLeftQuadForSingleDigit = false;
+	scannedTopCenterQuadForSingleDigit = false;
+	scannedTopRightQuadForSingleDigit = false;
+	scannedMidLeftQuadForSingleDigit = false;
+	scannedMidCenterQuadForSingleDigit = false;
+	scannedMidRightQuadForSingleDigit = false;
+	scannedBotLeftQuadForSingleDigit = false;
+	scannedBotCenterQuadForSingleDigit = false;
+	scannedBotRightQuadForSingleDigit = false;
 }
 
 
