@@ -882,46 +882,32 @@ int main()
 	return 0;
 }
 
+
 void displaySudokuPuzzle()
 {
+	cout << "Sudoku Puzzle: \n";
 	for (int i = 0; i < ROWS; i++)
 	{
+		cout << "|";
 		for (int j = 0; j < COLS; j++)
 		{
-			cout << "|";
-			if (puzzleInt[i][j] == 0)
-			{
-				cout << "  ";
-			}
-			else
-			{
-				cout << puzzleInt[i][j] << " ";
-			}
+			if (puzzleInt[i][j] == 0) cout << "- ";
+			else cout << puzzleInt[i][j] << " ";
 
-			if (puzzleInt[i][j + 1] == 0)
-			{
-				cout << "  ";
-			}
-			else
-			{
-				cout << puzzleInt[i][j + 1] << " ";
-			}
-			if (puzzleInt[i][j + 2] == 0)
-			{
-				cout << "  ";
-			}
-			else
-			{
-				cout << puzzleInt[i][j + 2];
-			}
+			// if (puzzleInt[i][j + 1] == 0) cout << " ";
+			// else cout << puzzleInt[i][j + 1] << " ";
+
+			// if (puzzleInt[i][j + 2] == 0) cout << " ";
+			// else cout << puzzleInt[i][j + 2];
+			if (j == 2 || j == 5 || j == 8) cout << "|";
 
 		} //j loop
 
-		cout << "|" << endl;
+		cout << endl;
 
 		if (i == 2 || i == 5 || i == 8) //draw below after drawing 3 rows
 		{
-			cout << "*******************" << endl;
+			cout << "**********************" << endl;
 		}
 
 	} //i loop
@@ -1599,7 +1585,7 @@ void fillInFreeCrossHatchedSquareInQuad(int key, int quadrantToFillID)
 				else if (quadrantToFillID == BOTCENTERQUAD)
 					quadrantBotCenter[row][col] = key;
 				else if (quadrantToFillID == BOTRIGHTQUAD)
-					quadrantBotCenter[row][col] = key;
+					quadrantBotRight[row][col] = key;
 			}
 		}
 	}
